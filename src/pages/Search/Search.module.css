@@ -1,0 +1,32 @@
+.container {
+    width: 100%;
+    max-width: 1350px;
+    padding: 0 15px;
+    margin: 0 auto;
+    height: 100vh;
+}
+
+.backToServiceCatalog {
+    display: flex;
+    gap: 13px;
+    font-weight: 100;
+    color: rgba(11, 104, 254, 1);
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 40px;
+    color: rgba(41, 41, 41, 1);
+    margin-bottom: 10px;
+    letter-spacing: 2%;
+}
+
+.subTitle {
+    font-family: "Golos";
+    font-weight: 400;
+    color: rgba(58, 74, 99, 1);
+    font-size: 32px;
+    margin-bottom: 32px;
+}
