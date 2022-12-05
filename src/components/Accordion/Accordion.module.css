@@ -1,0 +1,41 @@
+.main {
+    color: rgba(11, 104, 254, 1);
+    font-size: 26px;
+    letter-spacing: 2%;
+    background-color: rgba(252, 252, 252, 1);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 41.5px 25px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.arrow {
+    stroke: rgba(11, 104, 254, 1);
+    transition: scale 0.2s;
+}
+
+.arrow.open {
+    scale: -1;
+    stroke: rgba(113, 128, 150, 1);
+}
+
+.content {
+    background-color: rgba(252, 252, 252, 1);
+    overflow: hidden;
+    max-height: 0px;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.content.open {
+    max-height: 100000px;
+    overflow: visible;
+    opacity: 1;
+    padding: 25px;
+}

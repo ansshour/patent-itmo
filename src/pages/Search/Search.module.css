@@ -3,7 +3,8 @@
     max-width: 1350px;
     padding: 0 15px;
     margin: 0 auto;
-    height: 100vh;
+    margin-top: 36px;
+    padding-bottom: 36px;
 }
 
 .backToServiceCatalog {
@@ -24,9 +25,25 @@
 }
 
 .subTitle {
-    font-family: "Golos";
+    font-family: "Golos", sans-serif;
     font-weight: 400;
     color: rgba(58, 74, 99, 1);
     font-size: 32px;
     margin-bottom: 32px;
+}
+
+.favorites {
+    margin-top: 50px;
+}
+
+.name {
+    font-weight: 500;
+    font-size: 32px;
+    color: rgba(58, 74, 99, 1);
+    letter-spacing: 2%;
+    margin-bottom: 15px;
+}
+
+.accordions {
+    gap: 25px;
 }
