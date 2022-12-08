@@ -1,0 +1,48 @@
+.card {
+    padding: 20px;
+    font-family: "Golos", sans-serif;
+    background-color: white;
+    border-radius: 18px;
+}
+
+.name {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    font-weight: 500;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.name p {
+    cursor: pointer;
+}
+
+.openNewWindow {
+    cursor: pointer;
+}
+
+.line2 {
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #646464;
+    display: flex;
+    gap: 60px;
+    margin-bottom: 18px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.topBtns {
+    display: flex;
+    gap: 35px;
+}
+
+.content {
+    font-size: 24px;
+    color: #394456;
+}

@@ -1,6 +1,6 @@
 .container {
     width: 100%;
-    max-width: 1350px;
+    max-width: 1680px;
     padding: 0 15px;
     margin: 0 auto;
     margin-top: 36px;
@@ -46,4 +46,14 @@
 
 .accordions {
     gap: 25px;
+}
+
+@media (max-width: 1200px) {
+    .title {
+        font-size: 28px;
+    }
+
+    .subTitle {
+        font-size: 20px;
+    }
 }

@@ -5,24 +5,7 @@ import { useState } from "react";
 import { MyDatePicker } from "../DatePicker/myDatePicker";
 import { fetchData } from "../../api/fetchData";
 
-export const SearchPanel = () => {
-
-    const [search, setSearch] = useState({
-        searchQuery: "", // поисковой запрос
-        documentNumber: "", // номер документа
-        author: "", // автор
-        patentHolder: "", // патентообладатель
-        applicant: "" // заявитель
-    })
-
-    const [dateFrom, setDateFrom] = useState()
-    const [dateTo, setDateTo] = useState()
-
-    const variants = [
-        { id: 0, name: "Простой поиск", isActive: true },
-        { id: 1, name: "Расширенный поиск", isActive: false },
-        { id: 2, name: "Поиск A.I.", isActive: false },
-    ]
+export const SearchPanel = ({ search, setSearch, dateFrom, setDateFrom, dateTo, setDateTo, variants, setSearchResult, searchResult }) => {
 
     const makeSimpleSearchQueryBody = ({ searchQuery, documentNumber, author, patentHolder, applicant, dateFrom, dateTo, pageNumber }) => {
         return ({
@@ -65,16 +48,11 @@ export const SearchPanel = () => {
     const simpleQuery = async () => {
         try {
             const { data } = await fetchData.post("/api/patents/search", makeSimpleSearchQueryBody({
-                searchQuery: search.searchQuery,
-                documentNumber: search.documentNumber,
-                author: search.author,
-                patentHolder: search.patentHolder,
-                applicant: search.applicant,
-                dateFrom: dateFrom,
-                dateTo: dateTo,
-                pageNumber: search.pageNumber
+                ...search,
+                dateTo,
+                dateFrom
             }))
-            console.log(data)
+            setSearchResult(data)
         } catch (err) {
             console.error(err)
         }
@@ -93,59 +71,67 @@ export const SearchPanel = () => {
                     value={search.searchQuery}
                     onChange={(e) => { setSearch({ ...search, searchQuery: e.target.value }) }}
                 />
-                <div className={styles.btnWrapper}><Button onClick={simpleQuery}>Поиск</Button></div>
+                <div className={styles.btnWrapper}><Button primary onClick={simpleQuery}>Поиск</Button></div>
             </div>
-            <div className={styles.searchCriteria}>
-                <p className={styles.name}>Критерии поиска</p>
-                <div className={styles.line1}>
-                    <div className={styles.criteriasInputWrapper}>
-                        <label className={styles.placeholder}>Номер документа</label>
-                        <input
-                            className={styles.criteriasInput}
-                            value={search.documentNumber}
-                            onChange={(e) => { setSearch({ ...search, documentNumber: e.target.value }) }} />
+            {!searchResult && (
+                <div className={styles.searchCriteria}>
+                    <p className={styles.name}>Критерии поиска</p>
+                    <div className={styles.line1}>
+                        <div className={styles.criteriasInputWrapper}>
+                            <label className={styles.placeholder}>Номер документа</label>
+                            <input
+                                className={styles.criteriasInput}
+                                value={search.documentNumber}
+                                onChange={(e) => { setSearch({ ...search, documentNumber: e.target.value }) }} />
+                        </div>
+                        <div className={styles.datePicker}>
+                            <MyDatePicker
+                                placeholder="Дата публикации от"
+                                date={dateFrom}
+                                setDate={setDateFrom} />
+                        </div>
+                        <div className={styles.datePicker}>
+                            <MyDatePicker
+                                placeholder="Дата публикации до"
+                                date={dateTo}
+                                setDate={setDateTo} />
+                        </div>
                     </div>
-                    <div className={styles.datePicker}>
-                        <MyDatePicker placeholder="Дата публикации от" date={dateFrom} setDate={setDateFrom} />
+                    <div className={styles.line2}>
+                        <div className={styles.criteriasInputWrapper}>
+                            <label className={styles.placeholder}>Автор</label>
+                            <input
+                                className={styles.criteriasInput}
+                                value={search.author}
+                                onChange={(e) => { setSearch({ ...search, author: e.target.value }) }} />
+                        </div>
+                        <img src={information} alt="info" className={styles.information} />
                     </div>
-                    <div className={styles.datePicker}>
-                        <MyDatePicker placeholder="Дата публикации до" date={dateTo} setDate={setDateTo} />
+                    <div className={styles.line3}>
+                        <div className={styles.criteriasInputWrapper}>
+                            <label className={styles.placeholder}>Патентообладатель</label>
+                            <input
+                                className={styles.criteriasInput}
+                                value={search.patentHolder}
+                                onChange={(e) => { setSearch({ ...search, patentHolder: e.target.value }) }} />
+                        </div>
+                        <img src={information} alt="info" className={styles.information} />
+                    </div>
+                    <div className={styles.line4}>
+                        <div className={styles.criteriasInputWrapper}>
+                            <label className={styles.placeholder}>Заявитель</label>
+                            <input
+                                className={styles.criteriasInput}
+                                value={search.applicant}
+                                onChange={(e) => { setSearch({ ...search, applicant: e.target.value }) }} />
+                        </div>
+                        <img src={information} alt="info" className={styles.information} />
+                    </div>
+                    <div className={styles.clearAreas}>
+                        <Button secondary>Очистить поля</Button>
                     </div>
                 </div>
-                <div className={styles.line2}>
-                    <div className={styles.criteriasInputWrapper}>
-                        <label className={styles.placeholder}>Автор</label>
-                        <input
-                            className={styles.criteriasInput}
-                            value={search.author}
-                            onChange={(e) => { setSearch({ ...search, author: e.target.value }) }} />
-                    </div>
-                    <img src={information} alt="info" className={styles.information} />
-                </div>
-                <div className={styles.line3}>
-                    <div className={styles.criteriasInputWrapper}>
-                        <label className={styles.placeholder}>Патентообладатель</label>
-                        <input
-                            className={styles.criteriasInput}
-                            value={search.patentHolder}
-                            onChange={(e) => { setSearch({ ...search, patentHolder: e.target.value }) }} />
-                    </div>
-                    <img src={information} alt="info" className={styles.information} />
-                </div>
-                <div className={styles.line4}>
-                    <div className={styles.criteriasInputWrapper}>
-                        <label className={styles.placeholder}>Заявитель</label>
-                        <input
-                            className={styles.criteriasInput}
-                            value={search.applicant}
-                            onChange={(e) => { setSearch({ ...search, applicant: e.target.value }) }} />
-                    </div>
-                    <img src={information} alt="info" className={styles.information} />
-                </div>
-                <div className={styles.clearAreas}>
-                    <button className={styles.clearAreasBtn}>Очистить поля</button>
-                </div>
-            </div>
+            )}
         </div>
     )
 }

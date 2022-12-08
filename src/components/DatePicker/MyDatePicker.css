@@ -77,6 +77,7 @@
 .react-datepicker__navigation--next {
     right: 10px;
 }
+
 .react-datepicker__navigation--previous {
     left: 10px;
 }
@@ -102,10 +103,27 @@
 
 .react-datepicker__day {
     font-size: 16px;
-    color:  rgba(113, 128, 150, 1);
+    color: rgba(113, 128, 150, 1);
 }
 
-.react-datepicker__day--keyboard-selected, .react-datepicker__day--keyboard-selected:hover {
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__day--keyboard-selected:hover {
     background-color: rgb(64, 135, 249);
     color: white;
+}
+
+@media (max-width: 1200px) {
+    .placeholder-datePicker {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .custom-input-datepicker {
+        height: 65px;
+    }
+
+    .datepicker-calendar {
+        top: 33px;
+    }
 }

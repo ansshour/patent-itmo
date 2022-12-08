@@ -1,7 +1,10 @@
 import styles from "./Button.module.css"
 
-export const Button = ({ children, ...attr }) => {
+export const Button = ({ children, primary, secondary, ...attr }) => {
     return (
-        <button className={styles.button} {...attr}>{children}</button>
+        <>
+            {primary && <button className={styles.buttonPrimary} {...attr}>{children}</button>}
+            {secondary && <button className={styles.buttonSecondary} {...attr}>{children}</button>}
+        </>
     )
 }

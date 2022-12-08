@@ -1,0 +1,70 @@
+.top {
+    background-color: #FCFCFC;
+    padding: 37px 25px 37px 25px;
+    border-radius: 35px 35px 0 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.first {
+    display: flex;
+    gap: 50px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #0B68FE;
+    font-weight: 500;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.showFilters {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: #718096;
+    font-size: 24px;
+    margin-left: 78px;
+    cursor: pointer;
+}
+
+.title.active {
+    color: #0B68FE;
+    font-size: 32px;
+}
+
+.showFilters.active {
+    color: #0B68FE;
+    font-size: 32px;
+}
+
+.results {
+    background-color: #FCFCFC;
+}
+
+.totalAndSort {
+    padding: 25px;
+    font-family: "Ubuntu", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.total {
+    font-size: 24px;
+    letter-spacing: 2%;
+    color: #2F2F2F;
+    font-weight: 500;
+}
+
+.projectCards {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    margin: 25px;
+}
