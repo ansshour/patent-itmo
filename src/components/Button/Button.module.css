@@ -32,6 +32,22 @@
     background-color: rgba(231, 240, 255, 0.8);
 }
 
+.buttonBlue {
+    color: white;
+    background-color: #0B68FE;
+    font-size: 16px;
+    font-family: "Golos", sans-serif;
+    padding: 12px 20px;
+    transition: background-color 0.2s;
+    border-radius: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.buttonBlue:hover {
+    background-color: #085de7;
+}
+
 @media (max-width: 1200px) {
     .button {
         font-size: 16px;

@@ -11,6 +11,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 35px 35px 0 0;
+    border: 1px solid #f9f9f9;
+    border-bottom: none;
 }
 
 
@@ -31,6 +34,9 @@
     max-height: 0px;
     opacity: 0;
     transition: opacity 0.5s;
+    border-radius: 0 0 35px 35px;
+    border: 1px solid #f9f9f9;
+    border-top: none;
 }
 
 .content.open {
