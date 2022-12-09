@@ -2,8 +2,9 @@ import styles from "./Search.module.css"
 import backArrow from "./res/backArrow.svg"
 import { SearchPanel } from "../../components/SearchPanel/SearchPanel"
 import { Accordion } from "../../components/Accordion/Accordion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { SearchResults } from "../../components/SearchResults/SearchResults"
+import { Loader } from "../../components/Loader/Loader"
 
 export const Search = () => {
 
@@ -13,8 +14,10 @@ export const Search = () => {
         author: "", // автор
         patentHolder: "", // патентообладатель
         applicant: "", // заявитель
-        pageNumber: 1
     })
+
+    const [pageNumber, setPageNumber] = useState(1)
+
 
     const [dateFrom, setDateFrom] = useState()
     const [dateTo, setDateTo] = useState()
@@ -26,16 +29,23 @@ export const Search = () => {
     ]
 
     const [searchResult, setSearchResult] = useState(null)
+    const [status, setStatus] = useState(null)
 
     return (
         <div className={styles.container}>
+            {status === "loading" && (
+                <Loader />
+            )}
             <a className={styles.backToServiceCatalog}>
                 <img src={backArrow} alt="back" />
                 <p>Вернуться к Каталогу сервисов</p>
             </a>
             <h1 className={styles.title}>Сервис патентного ландшафта</h1>
             <h2 className={styles.subTitle}>Поиск патентной документации</h2>
-            <SearchPanel search={search} searchResult={searchResult} setSearch={setSearch} dateFrom={dateFrom} setDateFrom={setDateFrom} dateTo={dateTo} setDateTo={setDateTo} variants={variants} setSearchResult={setSearchResult} />
+            <SearchPanel setStatus={setStatus} pageNumber={pageNumber} search={search} searchResult={searchResult} setSearch={setSearch} dateFrom={dateFrom} setDateFrom={setDateFrom} dateTo={dateTo} setDateTo={setDateTo} variants={variants} setSearchResult={setSearchResult} />
+            {status === "error" && (
+                <p>Ошибка загрузки! Попробуйте снова!</p>
+            )}
             {!searchResult ? (
                 <div className={styles.favorites}>
                     <p className={styles.name}>Избранное</p>
@@ -45,7 +55,7 @@ export const Search = () => {
                     </div>
                 </div>
             ) : (
-                <SearchResults searchResult={searchResult} />
+                <SearchResults searchResult={searchResult} setPageNumber={setPageNumber} />
             )}
         </div>
     )

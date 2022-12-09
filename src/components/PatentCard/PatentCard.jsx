@@ -2,14 +2,26 @@ import styles from "./PatentCard.module.css"
 import openNewWindow from "./res/openNewWindow.svg"
 import addToFavorites from "./res/addToFavorites.svg"
 import download from "./res/download.svg"
+import { Link } from "react-router-dom";
 
 export const PatentCard = ({ title, MPK, document, inventors, description, applicants }) => {
+
+    const applicantsFormat = (applicants) => {
+        const applicantNames = applicants.map(({ name }) => name);
+        return applicantNames.join(" ")
+    }
+
+    const inventorsFormat = (inventors) => {
+        const inventorsNames = inventors.map(({ name }) => name);
+        return inventorsNames.join(" ")
+    }
+
     return (
         <div className={styles.card}>
             <div className={styles.top}>
                 <div className={styles.name}>
-                    <p dangerouslySetInnerHTML={{ __html: title }} />
-                    <img src={openNewWindow} alt="openNewWindow" className={styles.openNewWindow} />
+                    <Link to={"search/1"}><p dangerouslySetInnerHTML={{ __html: title }} /></Link>
+                    <a href="search/1" target="_blank"><img src={openNewWindow} alt="openNewWindow" className={styles.openNewWindow} /></a>
                 </div>
                 <div className={styles.topBtns}>
                     <img src={addToFavorites} alt="addTofavorites" />
@@ -17,14 +29,12 @@ export const PatentCard = ({ title, MPK, document, inventors, description, appli
                 </div>
             </div>
             <div className={styles.line2}>
-                <p>МПК {MPK}</p>
-                <p>Документ {document}</p>
-                <p>Заявитель {inventors?.map(({ name }) => name).join(", ")}</p>
-                <p>Автор {applicants?.map(({ name }) => name).join(", ")}</p>
+                <p className={styles.points}>МПК {MPK}</p>
+                <p className={styles.points}>Документ {document}</p>
+                {applicants && <p className={styles.points}>Заявитель {applicantsFormat(applicants)}</p>}
+                {inventors && <p className={styles.points}>Автор {inventorsFormat(inventors)}</p>}
             </div>
-            <p className={styles.content}>
-                Целью настоящего изобретения является реализация бытового устройства, содержащего логотип, который пользователь может воспринимать в 3D, и у которого отсутствует возможность выпадения с течением времени. Бытовое устройство, выполненное для достижения цели настоящего изобретения, изложенного в первом пункте формулы изобретения и ее соответствующих пунктах, содержит логотип, который расположен на его корпусе, и состоит из сегментов логотипа, таких как буква, знак и символ. Сегменты логотипа наносятся на площадки, сформированные на основе логотипа, и между логотипом и площадками имеются канавки, которые отделяют логотип и поверхность основы друг от друга. Канавки прорезаются в основе вдоль контура каждого сегмента логотипа, образуя логотип посредством известных способов формования.
-            </p>
+            <p className={styles.content} dangerouslySetInnerHTML={{ __html: description }} />
         </div>
     )
 }

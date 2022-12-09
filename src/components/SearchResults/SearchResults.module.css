@@ -65,6 +65,10 @@
 .projectCards {
     display: flex;
     flex-direction: column;
-    gap: 0px;
+    gap: 30px;
     margin: 25px;
+}
+
+.noResults {
+    font-size: 24px;
 }

@@ -3,6 +3,7 @@
     font-family: "Golos", sans-serif;
     background-color: white;
     border-radius: 18px;
+    box-shadow: 0px 0px 5px 0px rgba(34, 60, 80, 0.03);
 }
 
 .name {
@@ -42,7 +43,20 @@
     gap: 35px;
 }
 
+.topBtns img {
+    cursor: pointer;
+}
+
 .content {
     font-size: 24px;
     color: #394456;
+}
+
+.points {
+    max-width: 350px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical; 
 }

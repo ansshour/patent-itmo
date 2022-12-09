@@ -1,11 +1,11 @@
 import { Button } from "../Button/Button"
 import styles from "./SearchPanel.module.css"
 import information from "./res/info.svg"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MyDatePicker } from "../DatePicker/myDatePicker";
 import { fetchData } from "../../api/fetchData";
 
-export const SearchPanel = ({ search, setSearch, dateFrom, setDateFrom, dateTo, setDateTo, variants, setSearchResult, searchResult }) => {
+export const SearchPanel = ({ search, setSearch, dateFrom, setDateFrom, dateTo, setDateTo, variants, setSearchResult, searchResult, setStatus, pageNumber }) => {
 
     const makeSimpleSearchQueryBody = ({ searchQuery, documentNumber, author, patentHolder, applicant, dateFrom, dateTo, pageNumber }) => {
         return ({
@@ -45,25 +45,39 @@ export const SearchPanel = ({ search, setSearch, dateFrom, setDateFrom, dateTo, 
         })
     }
 
-    const simpleQuery = async () => {
+    const simpleQuery = async (e) => {
+        e?.preventDefault()
+        window.scroll({ top: 0, behavior: "smooth" })
+        if (!search.searchQuery.length && !search.documentNumber.length && !search.author.length && !search.applicant.length && !search.patentHolder.length && !dateFrom.length && !dateTo.length) return;
+        setStatus("loading")
         try {
             const { data } = await fetchData.post("/api/patents/search", makeSimpleSearchQueryBody({
                 ...search,
                 dateTo,
-                dateFrom
+                dateFrom,
+                pageNumber
             }))
             setSearchResult(data)
         } catch (err) {
             console.error(err)
+            setStatus("error")
+            setSearchResult(null)
+        } finally {
+            setStatus(null)
+            window.scroll({ top: 0, behavior: "smooth" })
         }
     }
+
+    useEffect(() => {
+        simpleQuery()
+    }, [pageNumber])
 
     return (
         <div className={styles.search}>
             <ul className={styles.variants}>
                 {variants.map(({ id, name, isActive }) => <li className={isActive ? [styles.variant, styles.active].join(" ") : styles.variant} key={id}>{name}</li>)}
             </ul>
-            <div className={styles.searchWrapper}>
+            <form className={styles.searchWrapper} onSubmit={(e) => simpleQuery(e)}>
                 <input
                     type="text"
                     placeholder="Введите поисковый запрос"
@@ -71,8 +85,8 @@ export const SearchPanel = ({ search, setSearch, dateFrom, setDateFrom, dateTo, 
                     value={search.searchQuery}
                     onChange={(e) => { setSearch({ ...search, searchQuery: e.target.value }) }}
                 />
-                <div className={styles.btnWrapper}><Button primary onClick={simpleQuery}>Поиск</Button></div>
-            </div>
+                <div className={styles.btnWrapper}><Button primary>Поиск</Button></div>
+            </form>
             {!searchResult && (
                 <div className={styles.searchCriteria}>
                     <p className={styles.name}>Критерии поиска</p>
