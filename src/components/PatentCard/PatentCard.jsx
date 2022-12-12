@@ -4,7 +4,7 @@ import addToFavorites from "./res/addToFavorites.svg"
 import download from "./res/download.svg"
 import { Link } from "react-router-dom";
 
-export const PatentCard = ({ title, MPK, document, inventors, description, applicants }) => {
+export const PatentCard = ({ title, MPK, document, inventors, description, applicants, id }) => {
 
     const applicantsFormat = (applicants) => {
         const applicantNames = applicants.map(({ name }) => name);
@@ -20,7 +20,7 @@ export const PatentCard = ({ title, MPK, document, inventors, description, appli
         <div className={styles.card}>
             <div className={styles.top}>
                 <div className={styles.name}>
-                    <Link to={"search/1"}><p dangerouslySetInnerHTML={{ __html: title }} /></Link>
+                    <Link to={`search/${id}`}><p dangerouslySetInnerHTML={{ __html: title }} /></Link>
                     <a href="search/1" target="_blank"><img src={openNewWindow} alt="openNewWindow" className={styles.openNewWindow} /></a>
                 </div>
                 <div className={styles.topBtns}>

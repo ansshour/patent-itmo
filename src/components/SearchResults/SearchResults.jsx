@@ -54,7 +54,7 @@ export const SearchResults = ({ searchResult, setPageNumber }) => {
                         </div>
                         <div className={styles.projectCards}>
                             {normaliseResults(searchResult).map(({ title, description, MPK, document, inventor, applicant, id }) => (
-                                <PatentCard key={id} title={title} description={description} MPK={MPK} document={document} inventors={inventor} applicants={applicant} />
+                                <PatentCard key={id} id={id} title={title} description={description} MPK={MPK} document={document} inventors={inventor} applicants={applicant} />
                             ))}
                         </div>
                         <div className={styles.pagination}>

@@ -25,6 +25,12 @@
     align-items: center;
     gap: 50px;
     margin-bottom: 15px;
+    justify-content: space-between;
+}
+
+.topInner {
+    display: flex;
+    gap: 50px;
 }
 
 .switchPage {
@@ -64,7 +70,6 @@
 .downloads {
     display: flex;
     margin-left: 132px;
-    margin-top: 5px;
     gap: 25px;
 }
 
@@ -120,7 +125,6 @@
     display: flex;
     gap: 25px;
     margin-left: 25px;
-    margin-top: 5px;
 }
 
 .content {
@@ -147,10 +151,17 @@
     font-size: 26px;
     color: #3A4A63;
     margin-bottom: 5px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.result img {
+    transform: translateY(-1px);
 }
 
 .search {
-    transform: translateY(3px) translateX(14px);
+    transform: translateY(-1px);
 }
 
 .blue {
@@ -202,4 +213,20 @@
 .closeContent {
     display: grid;
     gap: 50px;
+}
+
+
+.report, .drawings, .formula, .description, .docs {
+    font-size: 26px;
+    font-family: "Golos", sans-serif;
+    color: rgba(58, 74, 99, 1);
+}
+
+.pictures {
+    
+}
+
+.pictures img {
+    display: inline-block;
+    margin-right: 15px;
 }

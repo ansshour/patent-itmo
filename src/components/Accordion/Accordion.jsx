@@ -15,11 +15,7 @@ export const Accordion = ({ name, children }) => {
                 <span><Arrow className={open ? [styles.arrow, styles.open].join(" ") : styles.arrow} /></span>
             </div>
             <div className={open ? [styles.content, styles.open].join(" ") : styles.content}>
-                <p>Тут будет контент</p>
-                <p>Тут будет контент</p>
-                <p>Тут будет контент</p>
-                <p>Тут будет контент</p>
-                <p>Тут будет контент</p>
+                {children}
             </div>
         </div>
     )
