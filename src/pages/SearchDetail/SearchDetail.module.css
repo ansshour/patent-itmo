@@ -230,3 +230,24 @@
     display: inline-block;
     margin-right: 15px;
 }
+
+.switchPage img {
+    cursor: pointer;
+}
+
+.switchBtnWrapper {
+    position: relative;
+}
+
+.disabled {
+    width: 41px;
+    height: 41px;
+    background-color: rgba(17, 17, 17, 0.322);
+    position: absolute;
+    z-index: 2;
+    border-radius: 8px;
+}
+
+.left {
+    transform: rotate(180deg);
+}
